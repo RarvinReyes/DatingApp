@@ -28,7 +28,8 @@
               "node_modules/bootswatch/dist/sandstone/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/ball-scale-ripple-multiple.css"
             ],
             "scripts": []
           },
