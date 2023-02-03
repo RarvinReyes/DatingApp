@@ -7,7 +7,7 @@
             <p class="m-0"><strong>Information: </strong>You have made changes. Any unsaved changes will be lost.</p>
         </div>
     </div>
-    <div class="col-4 card">
+    <div class="col-3 card">
         <img class="card-img-top img-thumbnail" src="{{member.photoUrl || './assets/user.png'}}"
             alt="{{member.knownAs}}">
         <div class="card-body">
@@ -32,7 +32,7 @@
             <button class="btn btn-success col-12" form="editForm" [disabled]="!editForm.dirty">Save changes</button>
         </div>
     </div>
-    <div class="col-8">
+    <div class="col-9">
         <tabset class="member-tabset">
             <tab heading="About {{member.knownAs}}">
                 <form id="editForm" #editForm="ngForm" (ngSubmit)="updateMember()">
@@ -56,7 +56,7 @@
             </tab>
             <tab heading="Edit Photos">
                 <h4></h4>
-                <p>photo edit</p>
+                <app-photo-editor [member]="member"></app-photo-editor>
             </tab>
         </tabset>
     </div>
