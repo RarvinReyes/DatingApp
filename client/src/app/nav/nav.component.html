@@ -20,7 +20,7 @@
       <img src="{{user.photoUrl || './assets/user.png'}}" alt="user photo" class="me-2">
       <a id="button-link" dropdownToggle class="dropdown-toggle text-light text-decoration-none"
         aria-controls="dropdown-animated">
-        Welcome {{ user.username | titlecase }} <span class="caret"></span>
+        Welcome {{ user.knownAs | titlecase }} <span class="caret"></span>
       </a>
       <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
         <li role="menuitem"><a class="dropdown-item" routerLink="/member/edit">Edit Profile</a></li>

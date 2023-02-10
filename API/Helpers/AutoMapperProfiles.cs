@@ -15,6 +15,14 @@ namespace API.Helpers
             .ForMember(m => m.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             //CreateMap<IEnumerable<AppUser>, IEnumerable<MemberDto>>();
             CreateMap<Photo, PhotoDto>();
+            CreateMap<MemberUpdateDto, AppUser>();
+            CreateMap<AppUser, MemberUpdateDto>();
+            CreateMap<RegisterDto, AppUser>()
+            .ForMember(m => m.UserName, opt => opt.MapFrom(src => src.Username));
+            CreateMap<AppUser, UserDto>()
+            .ForMember(m => m.Username, opt => opt.MapFrom(src => src.UserName))
+            .ForMember(m => m.Token, opt => opt.Ignore())
+            .ForMember(m => m.PhotoUrl, opt => opt.Ignore());
         }
     }
 }

@@ -5,6 +5,7 @@ import { Member } from 'src/app/_models/member';
 import { MembersService } from 'src/app/_services/members.service';
 import { NgxGalleryImage } from '@kolkov/ngx-gallery';
 import { NgxGalleryAnimation } from '@kolkov/ngx-gallery';
+import { Photo } from 'src/app/_models/photo';
 
 @Component({
   selector: 'app-member-detail',
@@ -40,7 +41,7 @@ export class MemberDetailComponent implements OnInit {
         next: member => {
           this.member = member;
           
-          member.photos.forEach(photo => {
+          member.photos.forEach((photo:Photo) => {
             this.galleryImages.push({
               small: photo.url,
               medium: photo.url,
