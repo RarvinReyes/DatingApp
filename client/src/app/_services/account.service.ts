@@ -20,6 +20,7 @@ export class AccountService {
         if (res) {
           this.setCurrentUser(res);
         }
+        return res;
       })
     );
   }
@@ -30,6 +31,7 @@ export class AccountService {
         if (res) {
           this.setCurrentUser(res);
         }
+        return res;
       })
     );
   }

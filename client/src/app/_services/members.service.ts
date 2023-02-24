@@ -55,11 +55,8 @@ export class MembersService {
     return this.getPaginatedResult<Member[]>(this.baseUrl + 'users', params).pipe(
       map(response => {
         let cachedKey = Object.values(userParams).join('-');
-        console.log(response?.pagination);
-        console.log(cachedKey);
         this.memberCache.set(cachedKey, response);
         
-        console.log(this.memberCache);
         return response;
       })
     );
@@ -118,5 +115,19 @@ export class MembersService {
 
   deletePhoto(id: number) {
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + id, {})
+  }
+
+  addLike(username: string) {
+    return this.http.post(this.baseUrl + "likes/" + username, {})
+  }
+
+  getLikes(predicate: string, pageNumber: number, pageSize: number) {
+    let params = new HttpParams();
+
+    params = params.append('pageNumber', pageNumber);
+    params = params.append('pageSize', pageSize);
+    params = params.append('predicate', predicate);
+
+    return this.getPaginatedResult<Member[]>(this.baseUrl + 'likes', params);
   }
 }
