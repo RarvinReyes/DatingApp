@@ -1,0 +1,58 @@
+<div class="card">
+    <div class="card-body">
+        <div *ngIf="!messages || messages.length === 0">
+            no messages... try saying hi using the box below
+        </div>
+
+        <ul class="chat" *ngIf="messages && messages.length > 0">
+            <li *ngFor="let message of messages">
+                <div class="row px-3">
+                    <div *ngIf="message.senderUsername == username">
+                        <span class="chat-image float-start me-2">
+                            <img src="{{message.senderPhotoUrl || './assets/user.png'}}" alt="profile picture"
+                                class="rounded-circle">
+                        </span>
+                        <div class="chat-body">
+                            <div class="header">
+                                <small class="text-muted">
+                                    <span class="fa fa-clock-o"> {{message.messageSent + 'Z' | timeago}}</span>
+                                </small>
+                            </div>
+                            <p>{{message.content}}</p>
+                        </div>
+                    </div>
+                    <div *ngIf="message.senderUsername != username">
+                        <span class="chat-image float-end ms-2">
+                            <img src="{{message.senderPhotoUrl || './assets/user.png'}}" alt="profile picture"
+                                class="rounded-circle">
+                        </span>
+                        <div class="chat-body float-end">
+                            <div class="header">
+                                <small class="text-muted">
+                                    <span class="fa fa-clock-o"> {{message.messageSent + 'Z' | timeago}}</span>
+                                    <span class="text-danger"
+                                        *ngIf="!message.dateRead">(unread)</span>
+                                    <span class="text-success"
+                                        *ngIf="message.dateRead">(read 
+                                        {{message.messageSent + 'Z' | timeago}})</span>
+                                </small>
+                            </div>
+                            <p>{{message.content}}</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="card-footer">
+        <form #messageForm="ngForm" (ngSubmit)="SendMessage()" autocomplete="off">
+            <div class="input-group">
+                <input name="messageContent" required type="text" class="form-control input-sm"
+                    [(ngModel)]="messageContent" placeholder="Send private message....">
+                <div class="input-group-append ms-1">
+                    <button [disabled]="!messageForm.valid" class="btn btn-primary" type="submit">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
