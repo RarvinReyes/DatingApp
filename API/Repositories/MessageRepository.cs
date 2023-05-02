@@ -88,5 +88,40 @@ namespace API.Repositories
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async void AddGroup(Group group)
+        {
+            await _context.Groups.AddAsync(group);
+        }
+
+        public void RemoveConnection(Connection connection)
+        {
+            _context.Connections.Remove(connection);
+        }
+
+        public async Task<Connection> GetConnection(string connectionId)
+        {
+            return await _context.Connections.FindAsync(connectionId);
+        }
+
+        public async Task<Group> GetGroup(string groupName)
+        {
+            return await _context.Groups.Include(i => i.Connections).FirstOrDefaultAsync(f => f.Name == groupName);
+        }
+
+        public async Task<List<string>> GetConnectionsForUSer(string username)
+        {
+            return await _context.Connections
+            .Where(w => w.Username == username)
+            .Select(s => s.ConnectionId)
+            .ToListAsync();
+        }
+
+        public async Task<Group> GetGroupForConnection(string connectionId)
+        {
+            return await _context.Groups.Include(i => i.Connections)
+            .Where(w => w.Connections.Any(c => c.ConnectionId == connectionId))
+            .FirstOrDefaultAsync();
+        }
     }
 }

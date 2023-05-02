@@ -1,11 +1,10 @@
 <div class="card">
     <div class="card-body">
-        <div *ngIf="!messages || messages.length === 0">
+        <div *ngIf="(messageService.messageThreadSource$ | async)?.length === 0">
             no messages... try saying hi using the box below
         </div>
-
-        <ul class="chat" *ngIf="messages && messages.length > 0">
-            <li *ngFor="let message of messages">
+        <ul class="chat" *ngIf="(messageService.messageThreadSource$ | async)!.length > 0">
+            <li *ngFor="let message of (messageService.messageThreadSource$ | async)">
                 <div class="row px-3">
                     <div *ngIf="message.senderUsername == username">
                         <span class="chat-image float-start me-2">
@@ -15,7 +14,7 @@
                         <div class="chat-body">
                             <div class="header">
                                 <small class="text-muted">
-                                    <span class="fa fa-clock-o"> {{message.messageSent + 'Z' | timeago}}</span>
+                                    <span class="fa fa-clock-o"> {{message.messageSent | timeago}}</span>
                                 </small>
                             </div>
                             <p>{{message.content}}</p>
@@ -29,12 +28,12 @@
                         <div class="chat-body float-end">
                             <div class="header">
                                 <small class="text-muted">
-                                    <span class="fa fa-clock-o"> {{message.messageSent + 'Z' | timeago}}</span>
+                                    <span class="fa fa-clock-o"> {{message.messageSent | timeago}}</span>
                                     <span class="text-danger"
                                         *ngIf="!message.dateRead">(unread)</span>
                                     <span class="text-success"
                                         *ngIf="message.dateRead">(read 
-                                        {{message.messageSent + 'Z' | timeago}})</span>
+                                        {{message.messageSent | timeago}})</span>
                                 </small>
                             </div>
                             <p>{{message.content}}</p>

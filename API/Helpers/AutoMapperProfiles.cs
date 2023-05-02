@@ -35,6 +35,12 @@ namespace API.Helpers
             CreateMap<MessageDto, Message>()
             .ForMember(m => m.Sender, opt => opt.Ignore())
             .ForMember(m => m.Recipient, opt => opt.Ignore());
+
+            CreateMap<DateTime, DateTime>()
+            .ConvertUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));
+            
+            CreateMap<DateTime?, DateTime?>()
+            .ConvertUsing(d => d.HasValue ? DateTime.SpecifyKind(d.Value, DateTimeKind.Utc) : null);
                 //.ForMember(m => m.PhotoUrl, opt => opt.Ignore());
         }
     }
