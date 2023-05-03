@@ -75,14 +75,17 @@ namespace API.Repositories
             return await _context.Users.Include(i => i.Photos).ToListAsync();
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
-
         public void Update(AppUser user)
         {
             _context.Entry(user).State = EntityState.Modified;
+        }
+
+        public async Task<string> GetUserGender(string username)
+        {
+            return await _context.Users
+            .Where(w => w.UserName == username)
+            .Select(s => s.Gender)
+            .FirstOrDefaultAsync();
         }
     }
 }

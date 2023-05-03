@@ -34,6 +34,7 @@ export class NavComponent implements OnInit {
       next: (res) => {
         this.membersService.setUserParams(new UserParams(res));
         this.router.navigateByUrl('/members');
+        this.model = {};
       },
       error: err => {
         if (err.error) {

@@ -50,10 +50,5 @@ namespace API.Repositories
         {
             return await _context.Users.Include(i => i.UsersLiked).FirstOrDefaultAsync(f => f.Id == userId);
         }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
     }
 }
